@@ -51,7 +51,7 @@ public class emaillistServlet extends HttpServlet {
 			dao.insert(vo); //sql.developer에 값이 잘 추가 됬는지 확인
 			
 //			response.sendRedirect("/emaillist_MVC2/el?a=list");
-			WebUtil.redirect(request, response, "/emaillist_MVC2/el?a=list");
+			WebUtil.redirect(request, response, "/emaillist_MVC2/el?a=list"); //
 			//제일 마지막 작업 redirect, 기존에 있던 페이지 이용
 		} else if ("list".equals(actionform)) {
 			System.out.println("list 진입");

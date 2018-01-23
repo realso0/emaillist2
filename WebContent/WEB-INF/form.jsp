@@ -15,7 +15,7 @@
 		Last name(성): <input type="text" name="ln" value=""><br>
 		First name(이름): <input type="text" name="fn" value=""><br>
 		Email address: <input type="text" name="email" value=""><br>
-		<input type="text" name="a" value="insert"><br> 
+		<input type="hidden" name="a" value="insert"><br> 
 		<input type="submit" value="등록">
 	</form>
 	<br>
