@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javaex.dao.EmaillistDao;
+import com.javaex.util.WebUtil;
 import com.javaex.vo.EmaillistVo;
 
 
@@ -27,8 +28,10 @@ public class emaillistServlet extends HttpServlet {
 		
 		if("form".equals(actionform)) { //form.jsp는 controller가 따로 전달해줄 데이터는 없지만, request, response는 전달해주어야함
 			//System.out.println("form 진입");
-			RequestDispatcher rd=request.getRequestDispatcher("form.jsp"); //값을 입력받아, RequestDispatcher객체가 만들어지고, rd로 객체를 받는다. 객체 내의 getRequestDispatcher메소드를 이용해, form.jsp로 보낸다.
-			rd.forward(request, response); //rd의 forword메소드를 이용하여, request문서와 response문서를 form.jsp로 보낸다.
+//			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/form.jsp"); //값을 입력받아, RequestDispatcher객체가 만들어지고, rd로 객체를 받는다. 객체 내의 getRequestDispatcher메소드를 이용해, form.jsp로 보낸다.
+//			rd.forward(request, response); //rd의 forword메소드를 이용하여, request문서와 response문서를 form.jsp로 보낸다.
+			WebUtil.forward(request, response, "/WEB-INF/form.jsp");
+			
 		} else if ("insert".equals(actionform)) {
 			//System.out.println("insert 진입"); //화면으로 이동은 하지만, 화면에 보여지는 것은 없음.
 			String lastName=request.getParameter("ln");
@@ -47,7 +50,8 @@ public class emaillistServlet extends HttpServlet {
 			
 			dao.insert(vo); //sql.developer에 값이 잘 추가 됬는지 확인
 			
-			response.sendRedirect("el?a=list");
+//			response.sendRedirect("/emaillist_MVC2/el?a=list");
+			WebUtil.redirect(request, response, "/emaillist_MVC2/el?a=list");
 			//제일 마지막 작업 redirect, 기존에 있던 페이지 이용
 		} else if ("list".equals(actionform)) {
 			System.out.println("list 진입");
@@ -58,8 +62,9 @@ public class emaillistServlet extends HttpServlet {
 			
 			//어떤 데이터가 올지 모르므로, RequestDispatcher 객체에 담아 보냄.
 			request.setAttribute("elist", list); //리스트 실어 보내기, request.setAttribute(부를 이름, 보낼 데이터), 꺼내쓸 때는 getAttribute
-			RequestDispatcher rd=request.getRequestDispatcher("list.jsp"); //포워드 작업
-			rd.forward(request,response);
+//			RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/list.jsp"); //포워드 작업
+//			rd.forward(request,response);
+			WebUtil.forward(request, response, "/WEB-INF/list.jsp");
 			
 		} else {
 			System.out.println("잘못된 a값 처리");
